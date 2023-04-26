@@ -11,22 +11,32 @@ int getenvid(char *variable, char **env);
  */
 int main(__attribute__((unused))int a, char *vs[], char *env[])
 {
-char **vi;
 char *se, *so;
-int ws;
+int ws, i = 0, status = 0;
 struct stat ft;
 size_t n = 0;
 ssize_t nred;
-se = NULL;
+se = malloc(6);
+while (env[i] != NULL)
+{
+if (strcmpr(env[i], "SHLVL=1") == 0)
+{
+write(1, "$ ", 2);
+status = 1;
+}
+i++;
+}
 while ((nred = getline(&se, &n, stdin)) != -1)
 {
-vi = tokenizer(se);
+char **vi = tokenizer(se);
 vi[0] = _command(env, vi[0], vi);
 so = vi[0];
 if (stat(so, &ft) != 0)
 {
 if (strcmpr(so, "setenv") != 0 || strcmpr(so, "unsetenv") != 0)
-error_printer(vs[0], so);
+printf("%s: 1: %s: not found\n", vs[0], so);
+if (status == 1)
+write(1, "$ ", 2);
 }
 if (stat(so, &ft) == 0)
 {
@@ -39,7 +49,8 @@ perror("Error");
 }
 else
 {
-wait(&ws);
+if (wait(&ws) != -1 && status == 1)
+write(1, "$ ", 2);
 }
 }
 }

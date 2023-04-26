@@ -42,7 +42,7 @@ while (m <= l)
 variablecat[m] = var[m];
 m++; }
 variablecat[m] = '\0';
-environ[i] = strcatr(variablecat, value);
+environ[i] = strcatr(value, variablecat);
 }
 break;
 }
