@@ -18,8 +18,8 @@ typedef struct path_s
 char *path;
 void *next;
 } path_t;
-char *strtok_test(char *str, char *delim);
 int strcmpr(char *a, char *b);
+char *strcatr(char *a, char *b);
 void _unsetenv(char **environ, char *var);
 void _setenv(char **environ, char *var, char *value);
 char *_command(char **env, char *so, char **vi);

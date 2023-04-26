@@ -9,7 +9,7 @@ int getenvid(char *variable, char **env);
  *@env: environment
  * Return: Always 0.
  */
-int main(__attribute__((unused))int a, char *vs[], char *env[])
+int main(__attribute__((unused))int a, __attribute__((unused))char *vs[], char *env[])
 {
 char **vi;
 char *se, *so;
@@ -26,7 +26,7 @@ so = vi[0];
 if (stat(so, &ft) != 0)
 {
 if (strcmp(so, "setenv") != 0 || strcmp(so, "unsetenv") != 0)
-printf("%s: 1: %s: not found\n", vs[0], so);
+perror("Error:");
 }
 if (stat(so, &ft) == 0)
 {
@@ -114,7 +114,7 @@ j = 0;
 while (var[j] != '=')
 j++;
 var[j] = '\0';
-if (strcmp(var, variable) == 0)
+if (strcmpr(var, variable) == 0)
 {
 break;
 }
