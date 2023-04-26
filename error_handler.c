@@ -1,8 +1,8 @@
 #include "main.h"
 /**
  * error_printer - prints the errors
- * @name - name of the program
- * @command - command entered
+ * @name: name of the program
+ * @command: command entered
  * Return: Always 0.
  */
 void error_printer(char *name, char *command)
