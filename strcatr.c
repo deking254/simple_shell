@@ -1,6 +1,6 @@
 /**
  * strcatr - concatenates two strings
- * @a: second
+ * @b: second
  * @a: first
  * Return: buffer
  */
