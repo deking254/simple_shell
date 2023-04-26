@@ -21,6 +21,7 @@ void *next;
 int strcmpr(char *a, char *b);
 char *strcatr(char *a, char *b);
 void _unsetenv(char **environ, char *var);
+void error_printer(char *name, char *command);
 void _setenv(char **environ, char *var, char *value);
 char *_command(char **env, char *so, char **vi);
 #endif

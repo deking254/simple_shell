@@ -9,7 +9,7 @@ int getenvid(char *variable, char **env);
  *@env: environment
  * Return: Always 0.
  */
-int main(__attribute__((unused))int a, __attribute__((unused))char *vs[], char *env[])
+int main(__attribute__((unused))int a, char *vs[], char *env[])
 {
 char **vi;
 char *se, *so;
@@ -25,8 +25,8 @@ vi[0] = _command(env, vi[0], vi);
 so = vi[0];
 if (stat(so, &ft) != 0)
 {
-if (strcmp(so, "setenv") != 0 || strcmp(so, "unsetenv") != 0)
-perror("Error:");
+if (strcmpr(so, "setenv") != 0 || strcmpr(so, "unsetenv") != 0)
+error_printer(vs[0], so);
 }
 if (stat(so, &ft) == 0)
 {
