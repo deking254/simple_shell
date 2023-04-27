@@ -12,7 +12,7 @@ int getenvid(char *variable, char **env);
 int main(__attribute__((unused))int a, char *vs[], char *env[])
 {
 char *se, *so, **vi = NULL;
-int ws,  status = 0;
+int ws;
 struct stat ft;
 size_t n = 0;
 ssize_t nred;
@@ -31,13 +31,10 @@ while ((nred = getline(&se, &n, stdin)) != -1)
 vi = tokenizer(se);
 vi[0] = _command(env, vi[0], vi);
 so = vi[0];
+if (strcmpr(so, "exit") == 0)
+return (0);
 if (stat(so, &ft) != 0)
-{
-if (strcmpr(so, "setenv") != 0 || strcmpr(so, "unsetenv") != 0)
-printf("%s: 1: %s: not found\n", vs[0], so);
-if (status == 1)
-write(1, "$ ", 2);
-}
+error_printer(vs[0], so);
 if (stat(so, &ft) == 0)
 {
 if (fork() == 0)
@@ -49,7 +46,7 @@ perror("Error");
 }
 else
 {
-if (wait(&ws) != -1 && status == 1)
+if (wait(&ws) != -1)
 fflush(stdout);
 }
 }
