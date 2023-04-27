@@ -11,13 +11,13 @@ int getenvid(char *variable, char **env);
  */
 int main(__attribute__((unused))int a, char *vs[], char *env[])
 {
-char *se, *so;
-int ws, i = 0, status = 0;
+char *se, *so, **vi = NULL;
+int ws,  status = 0;
 struct stat ft;
 size_t n = 0;
 ssize_t nred;
-se = malloc(6);
-while (env[i] != NULL)
+se = NULL;
+/*while (env[i] != NULL)
 {
 if (strcmpr(env[i], "SHLVL=1") == 0)
 {
@@ -25,11 +25,11 @@ write(1, "$ ", 2);
 status = 1;
 }
 i++;
-}
+}*/
 while ((nred = getline(&se, &n, stdin)) != -1)
 {
-char **vi = tokenizer(se);
-/*vi[0] = _command(env, vi[0], vi);*/
+vi = tokenizer(se);
+vi[0] = _command(env, vi[0], vi);
 so = vi[0];
 if (stat(so, &ft) != 0)
 {
@@ -50,10 +50,12 @@ perror("Error");
 else
 {
 if (wait(&ws) != -1 && status == 1)
-write(1, "$ ", 2);
+fflush(stdout);
 }
 }
 }
+free(se);
+free(vi);
 return (0);
 }
 /**
