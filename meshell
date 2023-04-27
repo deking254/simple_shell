@@ -29,7 +29,7 @@ i++;
 while ((nred = getline(&se, &n, stdin)) != -1)
 {
 char **vi = tokenizer(se);
-vi[0] = _command(env, vi[0], vi);
+/*vi[0] = _command(env, vi[0], vi);*/
 so = vi[0];
 if (stat(so, &ft) != 0)
 {
