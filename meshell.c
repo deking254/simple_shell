@@ -32,7 +32,11 @@ vi = tokenizer(se);
 vi[0] = _command(env, vi[0], vi);
 so = vi[0];
 if (strcmpr(so, "exit") == 0)
+{
+free(se);
+free(vi);
 return (0);
+}
 if (stat(so, &ft) != 0 && strcmpr(so, "setenv") != 0 && strcmpr(so, "unsetenv") != 0)
 error_printer(vs[0], so);
 if (stat(so, &ft) == 0)
