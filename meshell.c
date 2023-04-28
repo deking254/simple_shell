@@ -22,9 +22,12 @@ vi = tokenizer(se);
 vi[0] = _command(env, vi[0], vi);
 so = vi[0];
 if (strcmpr(so, "exit") == 0)
-exit(0);
-if (strcmpr(so, "setenv") == 0 && strcmpr(so, "unsetenv") == 0)
-vi = NULL;
+{
+fflush(stdout);
+break;
+}
+if (strcmpr(so, "setenv") != 0 && strcmpr(so, "unsetenv") != 0)
+{
 if (stat(so, &ft) == 0)
 {
 if (fork() == 0)
@@ -42,6 +45,8 @@ fflush(stdout);
 }
 else
 error_printer(vs[0], so);
+}
+fflush(stdout);
 }
 free(se);
 free(vi);

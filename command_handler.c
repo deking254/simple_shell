@@ -20,6 +20,10 @@ if (strcmpr(so, "cd") == 0)
 _setenv(env, pwd, vi[1]);
 chdir(vi[1]);
 }
+if (strcmpr(so, "echo") == 0)
+{
+write(1, "/bin/ls", 7);
+}
 if (strcmpr(so, "ls") == 0)
 so = "/bin/ls";
 return (so);
