@@ -11,34 +11,20 @@ int getenvid(char *variable, char **env);
  */
 int main(__attribute__((unused))int a, char *vs[], char *env[])
 {
-char *se, *so, **vi = NULL;
+char *so, *se = NULL, **vi = NULL;
 int ws;
 struct stat ft;
 size_t n = 0;
 ssize_t nred;
-se = NULL;
-/*while (env[i] != NULL)
-{
-if (strcmpr(env[i], "SHLVL=1") == 0)
-{
-write(1, "$ ", 2);
-status = 1;
-}
-i++;
-}*/
 while ((nred = getline(&se, &n, stdin)) != -1)
 {
 vi = tokenizer(se);
 vi[0] = _command(env, vi[0], vi);
 so = vi[0];
 if (strcmpr(so, "exit") == 0)
-{
-free(se);
-free(vi);
-return (0);
-}
-if (stat(so, &ft) != 0 && strcmpr(so, "setenv") != 0 && strcmpr(so, "unsetenv") != 0)
-error_printer(vs[0], so);
+exit(0);
+if (strcmpr(so, "setenv") == 0 && strcmpr(so, "unsetenv") == 0)
+vi = NULL;
 if (stat(so, &ft) == 0)
 {
 if (fork() == 0)
@@ -54,6 +40,8 @@ if (wait(&ws) != -1)
 fflush(stdout);
 }
 }
+else
+error_printer(vs[0], so);
 }
 free(se);
 free(vi);
