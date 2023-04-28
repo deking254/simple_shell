@@ -45,4 +45,4 @@ while (env_tmp[p] != NULL)
 {
 environ[p] = env_tmp[p];
 p++; }
-}
+free(env_tmp); }

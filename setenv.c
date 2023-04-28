@@ -48,4 +48,4 @@ break;
 }
 i++;
 }
-}
+free(variablecat); }
