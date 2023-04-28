@@ -21,9 +21,9 @@ _setenv(env, pwd, vi[1]);
 chdir(vi[1]);
 }
 if (strcmpr(so, "echo") == 0)
-{
-write(1, "/bin/ls", 7);
-}
+so = "/bin/echo";
+if (strcmpr(so, "cat") == 0)
+so = "/bin/cat";
 if (strcmpr(so, "ls") == 0)
 so = "/bin/ls";
 return (so);
